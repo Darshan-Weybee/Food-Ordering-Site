@@ -1,0 +1,86 @@
+:root{
+    --divBorder : rgb(164, 164, 164);
+    --rating : #ff514e;
+}
+
+.home{
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.home-bestFood{
+    align-items: center;
+}
+
+.home-bestFood-left{
+    margin: 0 0 0 2rem;
+    width: 30%;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.home-bestFood-left-btn{
+    padding: 0.7rem;
+}
+
+.home-bestFood-right{
+    width: 70%;
+}
+
+.home-bestFood-left-btn button{
+    background: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    margin: 0.5rem;
+}
+
+.home-bestFood-item{
+    margin: 1rem;
+    width: 20%;
+    text-align: center;
+    position: relative;
+    border: 2px solid var(--divBorder);
+    border-radius: 2rem;
+}
+
+.home-bestFood-item-img{
+    height: 70%;
+}
+
+.home-bestFood-item-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+
+.home-bestFood-item-desc{
+    padding: 0.7rem;
+    height: 30%;
+}
+
+.home-bestFood-item-desc div{
+    margin: 0.2rem 0;
+}
+
+.home-bestFood-item-desc-name{
+    font-weight: bold;
+}
+
+.home-bestFood-item-desc-price{
+    font-weight: bold;
+}
+
+.home-bestFood-item-rate{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--rating);
+    padding: 0.2rem;
+    width: 26%;
+    border-top-left-radius: 2rem;
+    color: white;
+    font-weight: bold;
+}

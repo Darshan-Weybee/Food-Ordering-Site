@@ -1,0 +1,28 @@
+:root{
+    --background : #D2CAC9;
+}
+
+.navbar{
+    background-color: var(--background);
+    justify-content: space-around;
+    font-size: 1.1rem;
+    padding: 1rem;
+}
+
+.navbar-title span{
+    color: red;
+}
+
+.navbar-link{
+    gap: 3rem;
+}
+
+.navbar-link a{
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-right{
+    gap: 2rem;
+}
+
