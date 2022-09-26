@@ -18,6 +18,12 @@ function Header(){
                 <div className="header-middle-right">
                     <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?cs=srgb&dl=pexels-ella-olsson-1640777.jpg&fm=jpg" alt="headerImage"/>
                 </div>
+                <div className="header-side-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdt2fPFJh6-z7BqNx6htg2XoAXg4ssDbd31EOL7ay66NZu7aNmZoNYKGg2dYi61WTipS8&usqp=CAU" alt="food"/>
+                </div>
+                {/* <div className="header-lower-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjCzAXIp5otLrQW8CWn2LtM2BMUv9Hi4gEm2-3Ei2v0JUFSEcBx8KCf-oDVLaTRsrTO_U&usqp=CAU" alt="food"/>
+                </div> */}
             </div>
         </div>
     )

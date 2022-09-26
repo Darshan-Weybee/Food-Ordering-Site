@@ -30,8 +30,10 @@
 }
 
 .header-middle-right{
-    width: 22%;
+    width: 20%;
     height: 10%;
+    position: relative;
+    z-index: 999;
 }
 
 .header-middle-right img{
@@ -39,4 +41,32 @@
     height: 100%;
     object-fit: cover;
     border-radius: 3rem;
+}
+
+.header-side-img{
+    position: absolute;
+    right: 14%;
+    top: 9%;
+    /* transform: rotate(5deg); */
+    width: 14%;
+}
+.header-side-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2rem;
+}
+
+.header-lower-img{
+    position: absolute;
+    right: 34%;
+    top: 30%;
+    /* transform: rotate(-5deg); */
+    width: 15%;
+}
+.header-lower-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2rem;
 }

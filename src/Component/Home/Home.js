@@ -1,36 +1,42 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
+import FeedBack from "../feedback/FeedBack";
+import Menu from "../Menu/Menu";
+import { useNavigate, Outlet, useParams } from "react-router-dom";
 
 function Home(){
+    const params = useParams();
+    const navigate = useNavigate();
 
     const [bestFood, setBestFood] = useState([]);
     useEffect(() => {
-        axios.get("https://ig-food-menus.herokuapp.com/best-foods?_limit=6")
+        axios.get("https://ig-food-menus.herokuapp.com/best-foods?_limit=8")
         .then(res => setBestFood(res.data));
     },[]);
 
-    console.log(bestFood);
-
-
     return (
+        params.type ? <Outlet/> :
         <div>
             <Header/>
-            <div className="home">
-                <div className="home-bestFood flexRow">
-                    <div className="home-bestFood-left">
-                        <div className="home-bestFood-left-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
-                        <div className="home-bestFood-left-btn"><button>View All</button></div>
+            <Menu/>
+            <div className="home flexColumn">
+                <div className="home-bestFood">
+                    <div className="home-bestFood-title flexRow">
+                        <div className="home-bestFood-title-name">Recommended for You</div>
+                        <div className="home-bestFood-title-btn"><button className="home-bestFood-title-VBtn" onClick={() => navigate("best-foods")}>View All <i class="fa-solid fa-arrow-right"></i> </button></div>
                     </div>
-                    <div className="home-bestFood-right flexRow">{food(bestFood)}</div>
+                    <div className="home-bestFood-content flexRow">
+                            {bestFood.map(ele => food(ele))}
+                    </div>
                 </div>
             </div>
+            <FeedBack/>
         </div>
     )
 }
 
-const food = data => {
-    return data.map(ele => {
+const food = ele => {
         return (
             <div className="home-bestFood-item">
                 <div className="home-bestFood-item-img">
@@ -45,7 +51,6 @@ const food = data => {
             </div>
 
         )
-    })
 }
 
 

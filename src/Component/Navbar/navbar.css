@@ -9,6 +9,10 @@
     padding: 1rem;
 }
 
+.navbar-title{
+    font-size: 1.4rem;
+}
+
 .navbar-title span{
     color: red;
 }
@@ -22,7 +26,39 @@
     color: black;
 }
 
+.navbar-link-menu{
+    position: relative;
+}
+
+.navbar-link-menu:hover+.navbar-dropdown{
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-dropdown{
+    position: absolute;
+    top: 11%;
+    left: 37%;
+    background-color: white;
+    z-index: 999;
+    text-align: center;
+    width: 11%;
+}
+
+.navbar-dropdown a{
+    padding: 0.4rem;
+}
+
+.navbar-dropdown a:hover{
+    background-color: #e07371;
+    color: white;
+}
+
 .navbar-right{
     gap: 2rem;
+}
+
+.hidden{
+    display: none;
 }
 
