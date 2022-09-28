@@ -22,7 +22,7 @@ function ProductDetails({cartDispatch, favDispatch, recentDispatch}){
             recentDispatch(res, params.type);
         })
         .catch(error => console.error(error.message))
-    },[params.id, params.type])
+    },[params.id, params.type, recentDispatch])
 
 
     return (
