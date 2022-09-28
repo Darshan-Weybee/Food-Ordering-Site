@@ -5,27 +5,32 @@ const menu = [
     {
         name : "Burgers",
         type : "burgers",
-        img : "https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8YnVyZ2VyfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+        img : "https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8YnVyZ2VyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+        imagesT : ["https://rakskitchen.net/wp-content/uploads/2016/01/garlic-bread-with-cheese.jpg","https://c.ndtvimg.com/2021-07/vckh316o_grilled-chicken-sandwich_625x300_28_July_21.jpg","https://timesofindia.indiatimes.com/thumb/msid-87930581,width-1200,height-900,resizemode-4/.jpg"]
     },
     {
         name : "Breads",
         type : "breads",
-        img : "https://rakskitchen.net/wp-content/uploads/2016/01/garlic-bread-with-cheese.jpg"
+        img : "https://rakskitchen.net/wp-content/uploads/2016/01/garlic-bread-with-cheese.jpg",
+        imagesT : ["https://rakskitchen.net/wp-content/uploads/2016/01/garlic-bread-with-cheese.jpg","https://c.ndtvimg.com/2021-07/vckh316o_grilled-chicken-sandwich_625x300_28_July_21.jpg","https://timesofindia.indiatimes.com/thumb/msid-87930581,width-1200,height-900,resizemode-4/.jpg"]
     },
     {
         name : "Sandwitch",
         type : "sandwiches",
-        img : "https://c.ndtvimg.com/2021-07/vckh316o_grilled-chicken-sandwich_625x300_28_July_21.jpg"
+        img : "https://c.ndtvimg.com/2021-07/vckh316o_grilled-chicken-sandwich_625x300_28_July_21.jpg",
+        imagesT : ["https://rakskitchen.net/wp-content/uploads/2016/01/garlic-bread-with-cheese.jpg","https://c.ndtvimg.com/2021-07/vckh316o_grilled-chicken-sandwich_625x300_28_July_21.jpg","https://timesofindia.indiatimes.com/thumb/msid-87930581,width-1200,height-900,resizemode-4/.jpg"]
     },
     {
         name : "Pizza",
         type : "pizzas",
-        img : "https://timesofindia.indiatimes.com/thumb/msid-87930581,width-1200,height-900,resizemode-4/.jpg"
+        img : "https://timesofindia.indiatimes.com/thumb/msid-87930581,width-1200,height-900,resizemode-4/.jpg",
+        imagesT : ["https://rakskitchen.net/wp-content/uploads/2016/01/garlic-bread-with-cheese.jpg","https://c.ndtvimg.com/2021-07/vckh316o_grilled-chicken-sandwich_625x300_28_July_21.jpg","https://timesofindia.indiatimes.com/thumb/msid-87930581,width-1200,height-900,resizemode-4/.jpg"]
     },
     {
         name : "Drinks",
         type : "drinks",
-        img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyla30OIyPjJ61mmKw5IbSlkUVG1qckx_7RrjXbGsjLcAM8y2x3vzrZu3WhzjchBrG0FI&usqp=CAU"
+        img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyla30OIyPjJ61mmKw5IbSlkUVG1qckx_7RrjXbGsjLcAM8y2x3vzrZu3WhzjchBrG0FI&usqp=CAU",
+        imagesT : ["https://rakskitchen.net/wp-content/uploads/2016/01/garlic-bread-with-cheese.jpg","https://c.ndtvimg.com/2021-07/vckh316o_grilled-chicken-sandwich_625x300_28_July_21.jpg","https://timesofindia.indiatimes.com/thumb/msid-87930581,width-1200,height-900,resizemode-4/.jpg"]
     }
 ]
 

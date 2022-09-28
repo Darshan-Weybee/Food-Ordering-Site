@@ -4,27 +4,16 @@
 }
 
 .home{
-    width: 70%;
+    width: 100%;
     margin: 2rem auto;
+}
+
+.home-loader{
+    
 }
 
 .home-bestFood{
     align-items: center;
-}
-
-.home-bestFood-left{
-    margin: 0 0 0 2rem;
-    width: 30%;
-    text-align: center;
-    font-size: 1.1rem;
-}
-
-.home-bestFood-left-btn{
-    padding: 0.7rem;
-}
-
-.home-bestFood-right{
-    width: 70%;
 }
 
 .home-bestFood-title{
@@ -62,11 +51,13 @@
 
 .home-bestFood-item{
     margin: 1rem;
-    width: 18%;
+    width: 32%;
     text-align: center;
     position: relative;
     border: 2px solid var(--divBorder);
     border-radius: 2rem;
+    color: black;
+    text-decoration: none;
 }
 
 .home-bestFood-item-img img{
@@ -104,4 +95,38 @@
     border-top-left-radius: 2rem;
     color: white;
     font-weight: bold;
+}
+
+@media screen and (min-width : 700px) {
+    .home{
+        width: 90%;
+        margin: 2rem auto;
+    }
+
+    .home-bestFood-item{
+        width: 30%;
+    }
+    
+}
+@media screen and (min-width : 950px) {
+    .home{
+        width: 80%;
+        margin: 2rem auto;
+    }
+
+    .home-bestFood-item{
+        width: 23%;
+    }
+
+
+}
+@media screen and (min-width : 1250px) {
+    .home{
+        width: 70%;
+        margin: 2rem auto;
+    }
+
+    .home-bestFood-item{
+        width: 18%;
+    }
 }

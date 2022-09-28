@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import store from './Component/Reducer/Store';
 import ProductDetails from './Component/ProductDetails/ProductDetails';
 import AddToCart from './Component/AddToCart/AddToCart';
+import Favourite from './Component/Favourite/Favourite';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             </Route>
           </Route>
           <Route path='/addtocart' element={<AddToCart/>}/>
+          <Route path='/favourite' element={<Favourite/>}/>
        </Routes>
     </div>
     </Provider>

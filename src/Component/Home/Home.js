@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import FeedBack from "../feedback/FeedBack";
 import Menu from "../Menu/Menu";
-import { useNavigate, Outlet, useParams } from "react-router-dom";
+import Loader from "../Loader/Loader"
+import { useNavigate, Outlet, useParams, Link } from "react-router-dom";
+import Recent from "../Recent/Recent";
 
 function Home(){
     const params = useParams();
@@ -27,18 +29,19 @@ function Home(){
                         <div className="home-bestFood-title-btn"><button className="home-bestFood-title-VBtn" onClick={() => navigate("best-foods")}>View All <i class="fa-solid fa-arrow-right"></i> </button></div>
                     </div>
                     <div className="home-bestFood-content flexRow">
-                            {bestFood.map(ele => food(ele))}
+                            {+bestFood.length === 0 ? <Loader/> : bestFood.map((ele,index) => food(ele,index))}
                     </div>
                 </div>
             </div>
+            <Recent/>
             <FeedBack/>
         </div>
     )
 }
 
-const food = ele => {
+const food = (ele, index) => {
         return (
-            <div className="home-bestFood-item">
+            <Link key={index} to={`best-foods/${ele.id}`} className="home-bestFood-item">
                 <div className="home-bestFood-item-img">
                     <img src={ele.img} alt={ele.name} />
                 </div>
@@ -48,7 +51,7 @@ const food = ele => {
                     <div className="home-bestFood-item-desc-price">${ele.price}</div>
                 </div>
                 <div className="home-bestFood-item-rate">{ele.rate} <i class="fa-sharp fa-solid fa-star"></i></div>
-            </div>
+            </Link>
 
         )
 }

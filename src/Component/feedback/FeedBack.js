@@ -1,4 +1,27 @@
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 import React from "react";
+
+const responsive = {
+    superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+    }
+};
 
 const feedback = [
     {
@@ -29,7 +52,7 @@ const feedback = [
         desc: "I wanted to use natural products for my baby and came across Mamaearth two years ago. And I am loving it. I use the Baby Shampoo, Toothpaste, Face Cream and I just love all of them. The website works perfectly. I would suggest you make an app also. Payment is secure and delivery was on time. This is the best brand in this category.",
         name: "Priyanshi Singh",
         img: "https://mamaearthp.imgix.net/wysiwyg/Priyanshi_Singh_gHqZqXk.jpg?auto=format",
-        rating:"5.0"
+        rating: "5.0"
     },
     {
         desc: "I use Mamaearth Ubtan Face Wash. It gives me an instant natural glow. I love that the products are natural and don't contain any harmful preservatives. Plus the products are quite affordable.",
@@ -44,28 +67,43 @@ function FeedBack() {
         <div className="feedback">
             <div className="feedback-title">
                 <div className="feedback-title-name">What Our Customers Say</div>
-                <div className="feedback-title-img"><img src="https://mamaearthp.imgix.net/wysiwyg/strip2x.png?auto=format" alt="underline"/></div>
+                <div className="feedback-title-img"><img src="https://mamaearthp.imgix.net/wysiwyg/strip2x.png?auto=format" alt="underline" /></div>
             </div>
-            <div className="feedback-content flexRow">
-            {
-                feedback.map((feed, index) => {
-                    return <div key={index} className="feedback-item flexColumn">
-                        <div className="feedback-item-desc">
-                            {feed.desc}
-                        </div>
-                        <div className="feedback-item-info flexRow">
-                            <div className="feedback-item-info-img">
-                                <img src={feed.img} alt="feedback" />
+
+            <Carousel
+                swipeable={true}
+                draggable={false}
+                responsive={responsive}
+                infinite={true}
+                showDots={true}
+                // autoPlay={this.props.deviceType !== "mobile" ? true : false}s
+                autoPlaySpeed={1000}
+                keyBoardControl={true}
+                // customTransition="all .5"
+                transitionDuration={500}
+                containerClass="carousel-container"
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-40-px"
+            >
+                {
+                    feedback.map((feed, index) => {
+                        return <div key={index} className="feedback-item flexColumn">
+                            <div className="feedback-item-desc">
+                                {feed.desc}
                             </div>
-                            <div className="feedback-item-info-detail">
-                                <div className="feedback-item-info-name">{feed.name}</div>
-                                <div className="feedback-item-info-rating">{feed.rating} <i class="fa-sharp fa-solid fa-star"></i></div>
+                            <div className="feedback-item-info flexRow">
+                                <div className="feedback-item-info-img">
+                                    <img src={feed.img} alt="feedback" />
+                                </div>
+                                <div className="feedback-item-info-detail">
+                                    <div className="feedback-item-info-name">{feed.name}</div>
+                                    <div className="feedback-item-info-rating">{feed.rating} <i class="fa-sharp fa-solid fa-star"></i></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                })
-            }
-            </div>
+                    })
+                }
+            </Carousel>;
         </div>
     )
 }

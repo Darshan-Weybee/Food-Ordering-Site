@@ -1,0 +1,26 @@
+.popup-fav{
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem 1.3rem 1.3rem 1.3rem;
+    background-color: pink;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: absolute;
+    right: 5%;
+    top: 11%;
+}
+
+.popup-fav-s-icon{
+    background-color: white;
+    color: pink;
+    padding: 0.2rem 0.4rem;
+    border-radius: 50%;
+    margin:  0 1rem 0 0;
+}
+
+.popup-fav-success-msg{
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.1rem;
+}
