@@ -38,7 +38,7 @@ function AddToCart({ cartData, cartDispatch, deleteDispatch }) {
                     })
                 }
                 <div className="addToCart-total">
-                    <div><span className="addToCart-item-title">Grand Total : </span>&nbsp; <span className="addToCart-total-amount">$ {totalAmount(cartData) + 30}</span></div>
+                    <div><span className="addToCart-item-title">Grand Total : </span>&nbsp; <span className="addToCart-total-amount">$ {totalAmount(cartData)}</span></div>
                 </div>
             </div>
         )
