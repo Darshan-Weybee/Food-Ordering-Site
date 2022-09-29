@@ -14,18 +14,18 @@ function Recent({ recentData }) {
             <div className="recent-content flexRow">
                 {renderRecentData(recentData).map((item, index) => {
                     console.log(item);
-                    return <Link to={`${item.type}/${item.data.id}`} key={index} className="recent-item">
+                    return <div key={index} className="recent-item">
                         <div className="recent-item-img"><img src={item.data.img} alt="item" /></div>
                         <div className="recent-item-name">{item.data.name}</div>
-                    </Link>
-                }
-
-                )}
+                    </div>
+                })}
             </div>
         </div>}
         </>
     )
 }
+
+// to={`${item.type}/${item.data.id}`}
 
 const renderRecentData = (recentData) => {
     return recentData.sort((a, b) => (a.num > b.num) ? -1 : 1).slice(0, 5);
