@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 // import { Carousel } from 'react-responsive-carousel';
 
 const menu = [
@@ -36,22 +36,22 @@ const menu = [
     }
 ]
 
-const getConfigurableProps = () => ({
-    showArrows: false,
-    showStatus: false,
-    showIndicators: false,
-    infiniteLoop: true,
-    showThumbs: false,
-    useKeyboardArrows: false,
-    autoPlay: true,
-    stopOnHover: false,
-    swipeable: false,
-    dynamicHeight: true,
-    emulateTouch: true,
-    autoFocus: false,
-    interval: 2000,
-    transitionTime: 1000
-});
+// const getConfigurableProps = () => ({
+//     showArrows: false,
+//     showStatus: false,
+//     showIndicators: false,
+//     infiniteLoop: true,
+//     showThumbs: false,
+//     useKeyboardArrows: false,
+//     autoPlay: true,
+//     stopOnHover: false,
+//     swipeable: false,
+//     dynamicHeight: true,
+//     emulateTouch: true,
+//     autoFocus: false,
+//     interval: 2000,
+//     transitionTime: 1000
+// });
 
 
 function Menu() {
