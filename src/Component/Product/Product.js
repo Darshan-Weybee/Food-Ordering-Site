@@ -68,24 +68,8 @@ function Product({dataState, dispatchURL, favDispatch, cartDispatch}){
             dataRender(searchData, dataState.data, sortValue).map((data,index) => {
                 return  <Link to={data.id} key = {index} className="product-item">
                     <div className="product-hover-item">
-                        <div className="product-hover-item-fav product-hover-effect-btn" onClick={e => {
-                            if(e.target.className === "fa-heart"){
-                                setFavIsVisible(true);
-                            }
-                        setTimeout(() => {
-                            setFavIsVisible(false);
-                        }, 1000)
-                        favDispatch(data)}}><i class="fa-regular fa-heart"></i></div>
-                        <div className="product-hover-item-cart product-hover-effect-btn" onClick={e => {
-                            if(e.target.className === "fa-cart-shopping"){
-                                setIsVisible(true);
-                            }
-                        console.log(isVisible);
-                        setTimeout(() => {
-                            setIsVisible(false);
-                        }, 1000)
-                        cartDispatch(data, 1)
-                        }}><i class="fa-solid fa-cart-shopping"></i></div>
+                        <div className="product-hover-item-fav product-hover-effect-btn" onClick={e => onClickFav(setFavIsVisible, favDispatch, e, data)}><i class="fa-regular fa-heart"></i></div>
+                        <div className="product-hover-item-cart product-hover-effect-btn" onClick={e => onClickCart(setIsVisible, cartDispatch, e, data)}><i class="fa-solid fa-cart-shopping"></i></div>
                     </div>
                     <div className="product-item-img">
                         <img src={data.img} alt="food" onError={event => {
@@ -105,17 +89,38 @@ function Product({dataState, dispatchURL, favDispatch, cartDispatch}){
                 </Link>
             })}
             <div className="pagination">
-                <button className="pagination-btn" onClick={() => setSearch({_limit : 16 , _page : curPage - 1})} disabled={+curPage === 1}><i class="fa-solid fa-chevron-left"></i></button>
+                <button className="pagination-btn" onClick={() => setSearch({_limit : 16 , _page : +curPage - 1})} disabled={+curPage === 1}><i class="fa-solid fa-chevron-left"></i></button>
 
                 {pageButton(totalPage, curPage, setSearch)}
                 
-                <button className="pagination-btn" onClick={() => setSearch({_limit : 16 , _page : curPage + 1})} disabled={+curPage === totalPage}><i class="fa-solid fa-chevron-right"></i></button>
+                <button className="pagination-btn" onClick={() => setSearch({_limit : 16 , _page : +curPage + 1})} disabled={+curPage === totalPage}><i class="fa-solid fa-chevron-right"></i></button>
             </div>
             {isVisible ? <Popup/> : ""}
             {favIsVisible ? <FavPopup/> : ""}
         </div>
         </div>
     )
+}
+
+const onClickFav = (setFavIsVisible, favDispatch, e, data) => {
+    if (e.target.className === "fa-heart") {
+        setFavIsVisible(true);
+    }
+    setTimeout(() => {
+        setFavIsVisible(false);
+    }, 1000)
+    favDispatch(data)
+}
+
+
+const onClickCart = (setIsVisible, cartDispatch, e, data) => {
+    if (e.target.className === "fa-cart-shopping") {
+        setIsVisible(true);
+    }
+    setTimeout(() => {
+        setIsVisible(false);
+    }, 1000)
+    cartDispatch(data, 1)
 }
 
 const pageButton = (totalPage, currentPage, setSearch) =>{

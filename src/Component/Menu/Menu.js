@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const menu = [
     {
@@ -36,22 +36,22 @@ const menu = [
     }
 ]
 
-// const getConfigurableProps = () => ({
-//     showArrows: false,
-//     showStatus: false,
-//     showIndicators: false,
-//     infiniteLoop: true,
-//     showThumbs: false,
-//     useKeyboardArrows: false,
-//     autoPlay: true,
-//     stopOnHover: false,
-//     swipeable: false,
-//     dynamicHeight: true,
-//     emulateTouch: true,
-//     autoFocus: false,
-//     interval: 2000,
-//     transitionTime: 1000
-// });
+const getConfigurableProps = () => ({
+    showArrows: false,
+    showStatus: false,
+    showIndicators: false,
+    infiniteLoop: true,
+    showThumbs: false,
+    useKeyboardArrows: false,
+    autoPlay: true,
+    stopOnHover: false,
+    swipeable: false,
+    dynamicHeight: true,
+    emulateTouch: true,
+    autoFocus: false,
+    interval: 2000,
+    transitionTime: 1000
+});
 
 
 function Menu() {
@@ -64,17 +64,19 @@ function Menu() {
             <div className="menu-content flexRow">
                 {
                     menu.map((item, index) => {
-                        return <Link to={item.type} key={index} className="menu-item">
+                    return <>
+                        <Link to={item.type} key={index} className="menu-item">
                             <div className="menu-item-img"><img src={item.img} alt="item" /></div>
-                            {/* <Carousel {...getConfigurableProps()} animationHandler="fade" className="carousel-react">
-                            {
-                                item.imagesT.map(im => {
-                                    return <div className="menu-item-img"><img src={im} alt="slideshow" /></div>
-                                })
-                            }
-                            </Carousel> */}
                             <div className="menu-item-name">{item.name}</div>
                         </Link>
+                            <Carousel {...getConfigurableProps()} animationHandler="fade" className="react-carousel">
+                            {
+                                item.imagesT.map(im => {
+                                    return <img src={im} alt="slideshow" />
+                                })
+                            }
+                            </Carousel>
+                        </>
                     })
                 }
         </div>

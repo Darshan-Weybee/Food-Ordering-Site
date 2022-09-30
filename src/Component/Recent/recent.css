@@ -1,3 +1,7 @@
+:root{
+    --favIconColor : rgba(0, 0, 0, 0.3);
+}
+
 .recent{
     width: 100%;
     margin: 4rem auto;
@@ -24,6 +28,7 @@
     text-align: center;
     margin: 1.3rem 0;
     text-decoration: none;
+    position: relative;
 }
 
 .recent-item-img{
@@ -43,6 +48,35 @@
     font-size: 1.1rem;
     font-weight: bold;
     margin: 0.6rem 0;
+}
+
+.recent-item:hover .recent-hover-item{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+} 
+
+.recent-hover-item{
+    display: none;
+    position: absolute;
+    top: 4%;
+    right: 4%;
+}
+
+.recent-hover-effect-btn{
+    border: none;
+    background-color: var(--favIconColor);
+    padding: 0.4rem 0.5rem;
+    margin: 0 0 0 1rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+}
+
+.recent-hover-effect-btn:hover{
+    color: black;
+    cursor: pointer;
 }
 
 @media screen and (min-width : 700px) {

@@ -37,6 +37,30 @@
     height: 100%;
 }
 
+.react-carousel{
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+.menu-item:hover .react-carousel{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel.carousel-slider{
+    width: 100%;
+    height: 100%;
+}
+
+.carousel .slider-wrapper{
+    height: 100%;
+}
+
+.carousel .slider.animated{
+    height: 100%;
+}
+
 .menu-item-img img {
     width: 100%;
     height: 100%;

@@ -234,7 +234,14 @@
 @media screen and (min-width : 650px){
     .product-hover-item{
         top: 4%;
-        left: 24%;
+        left: 23%;
+    }
+}
+
+@media screen and (min-width : 800px){
+    .product-hover-item{
+        top: 4%;
+        left: 25%;
     }
     
 }

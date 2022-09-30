@@ -8,10 +8,6 @@
     margin: 2rem auto;
 }
 
-.home-loader{
-    
-}
-
 .home-bestFood{
     align-items: center;
 }
@@ -95,6 +91,35 @@
     border-top-left-radius: 2rem;
     color: white;
     font-weight: bold;
+}
+
+.home-bestFood-item:hover .home-hover-item{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+} 
+
+.home-hover-item{
+    display: none;
+    position: absolute;
+    top: 4%;
+    right: 4%;
+}
+
+.home-hover-effect-btn{
+    border: none;
+    background-color: var(--favIconColor);
+    padding: 0.4rem 0.5rem;
+    margin: 0 0 0 1rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+}
+
+.home-hover-effect-btn:hover{
+    color: black;
+    cursor: pointer;
 }
 
 @media screen and (min-width : 700px) {
