@@ -13,8 +13,8 @@ import { connect } from "react-redux";
 function Home({favDispatch, cartDispatch}) {
     const params = useParams();
     const navigate = useNavigate();
-    const [isVisible, setIsVisible] = useState(false);
-    const [favIsVisible, setFavIsVisible] = useState(false);
+    const [setIsVisible] = useState(false);
+    const [setFavIsVisible] = useState(false);
 
     const [bestFood, setBestFood] = useState([]);
     useEffect(() => {
