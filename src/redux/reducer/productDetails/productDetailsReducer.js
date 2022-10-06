@@ -1,4 +1,4 @@
-import { FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS } from "./FetchData"
+import { FETCH_PRODUCT_DETAILS_FAILURE, FETCH_PRODUCT_DETAILS_REQUEST, FETCH_PRODUCT_DETAILS_SUCCESS } from "./fetchProductDetails"
 
 const initialState = {
     loading : false,
@@ -6,19 +6,19 @@ const initialState = {
     error : ""
 }
 
-const reducer = (state = initialState, action) => {
+const productDetailsReducer = (state = initialState, action) => {
     switch(action.type){
-        case FETCH_DATA_REQUEST : return {
+        case FETCH_PRODUCT_DETAILS_REQUEST : return {
             ...state,
             loading : true
         }
-        case FETCH_DATA_SUCCESS : return {
+        case FETCH_PRODUCT_DETAILS_SUCCESS : return {
             ...state,
             loading : false,
             data : action.payload,
             error : ""
         }
-        case FETCH_DATA_FAILURE : return {
+        case FETCH_PRODUCT_DETAILS_FAILURE : return {
             ...state,
             loading : false,
             data : [],
@@ -29,4 +29,4 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-export default reducer
+export default productDetailsReducer

@@ -1,9 +1,8 @@
 const initialState = [];
 let isThere = false;
 let lcData = [];
-// let temp;
 
-const CartReducer = (state = initialState, action) => {
+const AddToCartReducer = (state = initialState, action) => {
     
     isThere = false;
     let temp = JSON.parse(localStorage.getItem("items"));
@@ -51,4 +50,4 @@ export function deleteItem(data){
     }
 }
 
-export default CartReducer
+export default AddToCartReducer

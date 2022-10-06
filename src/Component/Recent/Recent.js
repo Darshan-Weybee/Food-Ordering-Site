@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addItems } from "../AddToCart/AddToCartReducer";
-import { addFavItems } from "../Favourite/FavouriteReducer";
+import { addItems } from "../../redux/reducer/addToCart/AddToCartReducer";
+import { addFavItems } from "../../redux/reducer/favourite/FavouriteReducer";
 import Popup from "../PopUp/Popup";
 import FavPopup from "../FavPopUp/FavPopup"
 import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
 function Recent({ recentData, favDispatch, cartDispatch }) {
     const [isVisible, setIsVisible] = useState(false);
     const [favIsVisible, setFavIsVisible] = useState(false);
-    console.log("from home recxenbt daat",recentData);
-
     return (
         <>
             {+recentData.length === 0 ? "" :
@@ -21,7 +18,6 @@ function Recent({ recentData, favDispatch, cartDispatch }) {
                     </div>
                     <div className="recent-content flexRow">
                         {renderRecentData(recentData).map((item, index) => {
-                            console.log(item);
                             return <Link to={`/${item.typeOfItem}/${item.data.id}`} key={index} className="recent-item">
                                     <div className="recent-item-img"><img src={item.data.img} alt="item" /></div>
                                     <div className="recent-item-name">{item.data.name}</div>

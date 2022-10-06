@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { Link, Outlet, useParams, useSearchParams } from "react-router-dom";
-import { fetchData } from "../Reducer/FetchData";
-import Loader from "../Loader/Loader"
-import { addItems } from "../AddToCart/AddToCartReducer";
-import { addFavItems } from "../Favourite/FavouriteReducer";
-import Popup from "../PopUp/Popup";
-import FavPopup from "../FavPopUp/FavPopup"
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { fetchProductData } from "../../redux/reducer/productListing/fetchProductData";
+import Loader from "../../Component/Loader/Loader"
+import { addItems } from "../../redux/reducer/addToCart/AddToCartReducer";
+import { addFavItems } from "../../redux/reducer/favourite/FavouriteReducer";
+import Popup from "../../Component/PopUp/Popup";
+import FavPopup from "../../Component/FavPopUp/FavPopup"
+import { useMemo } from "react";
 
 
-function Product({dataState, dispatchURL, favDispatch, cartDispatch}){
+function Product({dataState, productDispatch, favouriteDispatch, cartDispatch}){
     const [searchValue, setSearchValue] = useSearchParams("");
-    const [searchData, setSearchData] = useState([]);
     const params = useParams();
+    const [searchData, setSearchData] = useState([]);
     const [page, setPage] = useState({});
     const [search, setSearch] = useSearchParams(1);
     const curPage = search.get("_page") ? search.get("_page") : 1;
@@ -22,11 +23,11 @@ function Product({dataState, dispatchURL, favDispatch, cartDispatch}){
     const [isVisible, setIsVisible] = useState(false);
     const [favIsVisible, setFavIsVisible] = useState(false);
 
-    const totalPage = Math.ceil(page[params.type]/16);
+    const totalPage = useMemo(() =>  Math.ceil(page[params.type]/16), [page, params.type]);
 
     useEffect(() => {
-        dispatchURL(`https://ig-food-menus.herokuapp.com/${params.type}?_limit=${limit}&_page=${curPage}`)
-    },[dispatchURL, params.type, limit, curPage]);
+        productDispatch(params.type, limit, curPage);
+    },[productDispatch, params.type, limit, curPage]);
 
     useEffect(() => {
         fetch("https://ig-food-menus.herokuapp.com/pagination")
@@ -46,7 +47,6 @@ function Product({dataState, dispatchURL, favDispatch, cartDispatch}){
 
 
     return(
-        params.id ? <Outlet/> :
         <div className="product-parent flexColumn">
             <div className="product-upper flexRow">
             <div className="search flexRow">
@@ -68,7 +68,7 @@ function Product({dataState, dispatchURL, favDispatch, cartDispatch}){
             dataRender(searchData, dataState.data, sortValue).map((data,index) => {
                 return  <Link to={data.id} key = {index} className="product-item">
                     <div className="product-hover-item">
-                        <div className="product-hover-item-fav product-hover-effect-btn" onClick={e => onClickFav(setFavIsVisible, favDispatch, e, data)}><i class="fa-regular fa-heart"></i></div>
+                        <div className="product-hover-item-fav product-hover-effect-btn" onClick={e => onClickFav(setFavIsVisible, favouriteDispatch, e, data)}><i class="fa-regular fa-heart"></i></div>
                         <div className="product-hover-item-cart product-hover-effect-btn" onClick={e => onClickCart(setIsVisible, cartDispatch, e, data)}><i class="fa-solid fa-cart-shopping"></i></div>
                     </div>
                     <div className="product-item-img">
@@ -102,14 +102,14 @@ function Product({dataState, dispatchURL, favDispatch, cartDispatch}){
     )
 }
 
-const onClickFav = (setFavIsVisible, favDispatch, e, data) => {
+const onClickFav = (setFavIsVisible, favouriteDispatch, e, data) => {
     if (e.target.className === "fa-heart") {
         setFavIsVisible(true);
     }
     setTimeout(() => {
         setFavIsVisible(false);
     }, 1000)
-    favDispatch(data)
+    favouriteDispatch(data)
 }
 
 
@@ -160,15 +160,15 @@ const dataRender = (searchData, actualData, sortValue) => {
 
 const mapStateToProps = state => {
     return {
-        dataState : state.product
+        dataState : state.productList
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        dispatchURL : url => dispatch(fetchData(url)),
-        cartDispatch : (data, quan) => dispatch(addItems(data, quan)),
-        favDispatch : data => dispatch(addFavItems(data)),
+        productDispatch : (type, limit, currentPage) => dispatch(fetchProductData(type, limit, currentPage)),
+        cartDispatch : (data, quantity) => dispatch(addItems(data, quantity)),
+        favouriteDispatch : data => dispatch(addFavItems(data)),
     }
 }
 

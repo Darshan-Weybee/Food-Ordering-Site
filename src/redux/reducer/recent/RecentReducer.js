@@ -7,7 +7,6 @@ const RecentReducer = (state = initialState, action) => {
     let temp = JSON.parse(localStorage.getItem("recent"));
     temp = temp !== null ? temp : initialState;
 
-    console.log("recent", temp);
 
     switch(action.type){
         
@@ -25,7 +24,6 @@ const RecentReducer = (state = initialState, action) => {
             }
             return st;
         })
-        console.log(action);
         lcData =  isThere ? temp : [...temp, {data : action.payload, typeOfItem : action.typeOfItem, num : 1}]
         localStorage.setItem("recent", JSON.stringify(lcData));
         return lcData;
