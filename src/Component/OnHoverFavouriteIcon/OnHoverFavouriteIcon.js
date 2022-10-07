@@ -7,7 +7,7 @@ function OnHoverFavouriteIcon({ favouriteDispatch, data }) {
     const [favIsVisible, setFavIsVisible] = useState(false);
     return (
         <>
-        <div className="product-hover-item-fav product-hover-effect-btn" onClick={e => onClickFav(setFavIsVisible, favouriteDispatch, e, data)}>
+        <div className="on-hover-fav"onClick={e => onClickFav(setFavIsVisible, favouriteDispatch, e, data)}>
             <i class="fa-regular fa-heart"></i>
         </div>
         {favIsVisible && <FavPopup/>}

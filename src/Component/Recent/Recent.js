@@ -28,8 +28,8 @@ const RenderRecentData = ({recentData}) => {
                     </div>
                     <div className="recent-item-name">{item.data.name}</div>
                     <div className="recent-hover-item">
-                        <OnHoverFavouriteIcon data={item.data}/>
-                        <OnHoverCartIcon data={item.data} quantity={1}/>
+                        <div className="recent-hover-item-fav recent-hover-effect-btn"><OnHoverFavouriteIcon data={item.data}/></div>
+                        <div className="recent-hover-item-cart recent-hover-effect-btn"><OnHoverCartIcon data={item.data} quantity={1}/></div>
                     </div>
                 </Link>
         })}

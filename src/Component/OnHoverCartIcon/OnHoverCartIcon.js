@@ -7,10 +7,11 @@ function OnHoverCartIcon({ cartDispatch, data, quantity }) {
     const [isCartVisible, setIsCartVisible] = useState(false);
     return (
         <>
-            <div className="product-hover-item-cart product-hover-effect-btn" onClick={e => onClickCart(setIsCartVisible, cartDispatch, e, data, quantity)}>
+            <div className="on-hover-cart" onClick={e => onClickCart(setIsCartVisible, cartDispatch, e, data, quantity)}>
                 <i class="fa-solid fa-cart-shopping"></i>
             </div>
             {isCartVisible && <CartPopup />}
+            {/* { <CartPopup />} */}
         </>
     )
 

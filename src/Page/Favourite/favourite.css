@@ -89,9 +89,8 @@
 .fav-item-delete button:hover{
     background-color: var(--textColor);
     color: white;
-    border: none;
+    border: 1px solid var(--textColor);
     cursor: pointer;
-    padding: 0.35rem 0.7rem;
 }
 
 .fav-total{
@@ -145,10 +144,6 @@
 
     .fav-item-delete button{
         padding: 0.5rem 1.8rem;
-    }
-
-    .fav-item-delete button:hover{
-        padding: 0.65rem 1.8rem;
     }
 
     .empty-cart{

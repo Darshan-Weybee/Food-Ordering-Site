@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { fetchProductData } from "../../redux/reducer/productListing/fetchProductData";
@@ -8,32 +8,35 @@ import Search from "../../Component/Search/Search";
 import OnHoverFavouriteIcon from "../../Component/OnHoverFavouriteIcon/OnHoverFavouriteIcon";
 import OnHoverCartIcon from "../../Component/OnHoverCartIcon/OnHoverCartIcon";
 import Image from "../../Component/Image/Image";
+import { fetchDataForCount } from "../../redux/reducer/dataCounter/fetchDataForCount";
 
 
-function Product({ dataState, totalItems, productDispatch, favouriteDispatch, cartDispatch }) {
+function Product({ dataState, totalItems, productDispatch, dataCountDispatch, totalData }) {
     const params = useParams();
     const [search, setSearch] = useSearchParams(1);
 
-    // const [searchData, setSearchData] = useState([]);
-    // const inputRef = useRef("");
-    // const [sortValue, setSortValue] = useState(null);
-
     const currentPage = useMemo(() => search.get("_page") ? search.get("_page") : 1, [search]);
-    const pageLimit = useMemo(() => search.get("_limit") ? search.get("_limit") : 16, [search]);
-    const totalPage = useMemo(() => Math.ceil(totalItems[params.type] / 16), [totalItems, params.type]);
+    const totalPage = useMemo(() => Math.ceil(totalData.data.length / 16), [totalData.data.length]);
+
+    const searchObj  = useMemo(()=>{
+        const params = {};
+        search.forEach((value,key) => {
+            params[key]=value;
+        })
+        return {...params};
+    },[search])
 
     useEffect(() => {
-        productDispatch(params.type, pageLimit, currentPage);
-    }, [productDispatch, params.type, pageLimit, currentPage]);
+        let counterParam = "";
+        search.forEach((value,key) => {if(key !== "_limit" && key!=="_page") counterParam = counterParam.concat(`${key}=${value}&`)})
+        dataCountDispatch(params.type, counterParam)
+    },[dataCountDispatch, params.type, search])
 
-    // let sValue = search.get("name_like");
-    // let sLimit = search.get("_limit")
-    // useEffect(() => {
-    //     if(sValue === "") return setSearchData([]);
-    //     fetch(`https://ig-food-menus.herokuapp.com/our-foods?_limit=${sLimit}&name_like=${sValue}`)
-    //     .then(response => response.json())
-    //     .then(res => setSearchData(res))
-    // },[sLimit,sValue]);
+    useEffect(() => {
+        let parameter = "";
+        search.forEach((value,key) => parameter = parameter.concat(`${key}=${value}&`))
+        productDispatch(params.type, parameter);
+    }, [productDispatch, params.type, search]);
 
     return (
         <div className="product-parent flexColumn">
@@ -44,7 +47,7 @@ function Product({ dataState, totalItems, productDispatch, favouriteDispatch, ca
                 {dataState.data && <RenderProductData dataState={dataState} />}
 
                 <div className="pagination">
-                    <PageButton totalPage={totalPage} currentPage={currentPage} setSearch={setSearch} />
+                    <PageButton totalPage={totalPage} currentPage={currentPage} setSearch={setSearch} searchObj={searchObj}/>
                 </div>
             </div>
         </div>
@@ -55,8 +58,8 @@ const RenderProductData = ({ dataState }) => {
     return dataState.data.map((data, index) => {
         return <Link to={data.id} key={index} className="product-item">
             <div className="product-hover-item">
-                <OnHoverFavouriteIcon data={data} />
-                <OnHoverCartIcon data={data} quantity={1} />
+                <div className="product-hover-item-fav product-hover-effect-btn"><OnHoverFavouriteIcon data={data}/></div>
+                <div className="product-hover-item-cart product-hover-effect-btn"><OnHoverCartIcon data={data} quantity={1} /></div>
             </div>
             <div className="product-item-img">
                 <Image path={data.img}/>
@@ -74,22 +77,24 @@ const RenderProductData = ({ dataState }) => {
     })
 }
 
-const PageButton = ({ totalPage, currentPage, setSearch }) => {
+const PageButton = ({ totalPage, currentPage, setSearch, searchObj }) => {
     let btn = [];
     let pageLimit = 4;
     let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
 
-    btn.push(<button className="pagination-btn" onClick={() => setSearch({ _limit: 16, _page: +currentPage - 1 })} disabled={+currentPage === 1}><i class="fa-solid fa-chevron-left"></i></button>)
+    console.log("searchObj",searchObj);
+
+    btn.push(<button className="pagination-btn" onClick={() => setSearch({ ...searchObj, _limit: 16, _page: +currentPage - 1 })} disabled={+currentPage === 1}><i class="fa-solid fa-chevron-left"></i></button>)
 
     for (let i = 0; i < pageLimit; i++) {
         let num = start + i + 1;
 
         if (num > totalPage) break;
 
-        btn.push(<button key={num} className={`pagination-btn ${+currentPage === +num ? "active" : ""}`} onClick={() => setSearch({ _limit: 16, _page: num })}>{num}</button>);
+        btn.push(<button key={num} className={`pagination-btn ${+currentPage === +num ? "active" : ""}`} onClick={() => setSearch({ ...searchObj, _limit: 16, _page: num })}>{num}</button>);
     }
 
-    btn.push(<button className="pagination-btn" onClick={() => setSearch({ _limit: 16, _page: +currentPage + 1 })} disabled={+currentPage === totalPage}><i class="fa-solid fa-chevron-right"></i></button>);
+    btn.push(<button className="pagination-btn" onClick={() => setSearch({ ...searchObj, _limit: 16, _page: +currentPage + 1 })} disabled={+currentPage === totalPage}><i class="fa-solid fa-chevron-right"></i></button>);
 
     return btn;
 }
@@ -97,13 +102,15 @@ const PageButton = ({ totalPage, currentPage, setSearch }) => {
 const mapStateToProps = state => {
     return {
         dataState: state.productList,
-        totalItems: state.totalItems
+        totalItems: state.totalItems,
+        totalData : state.totalData
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        productDispatch: (type, pageLimit, currentPage) => dispatch(fetchProductData(type, pageLimit, currentPage))
+        productDispatch: (type, searchString) => dispatch(fetchProductData(type, searchString)),
+        dataCountDispatch : (type, searchParam) => dispatch(fetchDataForCount(type, searchParam))
     }
 }
 

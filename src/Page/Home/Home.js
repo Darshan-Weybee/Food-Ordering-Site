@@ -16,14 +16,14 @@ function Home({ bestFood, totalItems, bestFoodDataDispatch, totalItemsDispatch }
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(+bestFood.data.length !== 0) return;
+        if (+bestFood.data.length !== 0) return;
         bestFoodDataDispatch();
     }, [bestFoodDataDispatch, bestFood.data.length]);
 
     useEffect(() => {
-        if(totalItems.data) return;
+        if (totalItems.data) return;
         totalItemsDispatch();
-    },[totalItemsDispatch,totalItems.data])
+    }, [totalItemsDispatch, totalItems.data])
 
     return (
         <div>
@@ -37,7 +37,7 @@ function Home({ bestFood, totalItems, bestFoodDataDispatch, totalItemsDispatch }
                     </div>
                     <div className="home-bestFood-content flexRow">
                         {bestFood.loading && <Loader />}
-                        {bestFood.data && <RenderBestFoodData bestFoodData={bestFood.data}/>}
+                        {bestFood.data && <RenderBestFoodData bestFoodData={bestFood.data} />}
                     </div>
                 </div>
             </div>
@@ -47,13 +47,15 @@ function Home({ bestFood, totalItems, bestFoodDataDispatch, totalItemsDispatch }
     )
 }
 
-const RenderBestFoodData = ({bestFoodData}) => {
+const RenderBestFoodData = ({ bestFoodData }) => {
     return bestFoodData.map((item, index) => {
         return <Link key={index} to={`best-foods/${item.id}`} className="home-bestFood-item">
-           <OnHoverFavouriteIcon data={item}/>
-           <OnHoverCartIcon data={item} quantity={1}/>
+            <div className="home-hover-item">
+                <div className="home-hover-item-fav home-hover-effect-btn"><OnHoverFavouriteIcon data={item}/></div>
+                <div className="home-hover-item-cart home-hover-effect-btn"><OnHoverCartIcon data={item} quantity={1}/></div>
+            </div>
             <div className="home-bestFood-item-img">
-                <Image path={item.img}/>
+                <Image path={item.img} />
             </div>
             <div className="home-bestFood-item-desc">
                 <div className="home-bestFood-item-desc-dsc">{item.dsc}</div>
@@ -68,15 +70,15 @@ const RenderBestFoodData = ({bestFoodData}) => {
 
 const mapStateToProps = state => {
     return {
-        bestFood : state.bestFood,
-        totalItems : state.totalItems
+        bestFood: state.bestFood,
+        totalItems: state.totalItems
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        totalItemsDispatch : () => dispatch(fetchTotalNoOfItems()),
-        bestFoodDataDispatch : () => dispatch(fetchBestFoodData())
+        totalItemsDispatch: () => dispatch(fetchTotalNoOfItems()),
+        bestFoodDataDispatch: () => dispatch(fetchBestFoodData())
     }
 }
 

@@ -44,8 +44,8 @@ const RenderProductDetails = ({productInfo, quantity, setQuantity}) => {
                 <button className="productDetails-abtn" onClick={() => increaseQuantity(setQuantity)}>+</button>
             </div>
             <div className="productDetails-cart">
-                <OnHoverCartIcon data={productInfo.data} quantity={quantity} />
-                <OnHoverFavouriteIcon data={productInfo.data} />
+                <button className="productDetails-cart-btn"><OnHoverCartIcon data={productInfo.data} quantity={quantity}/></button>
+                <button className="productDetails-cart-fav"><OnHoverFavouriteIcon data={productInfo.data}/></button>
             </div>
         </div>
     </div>
