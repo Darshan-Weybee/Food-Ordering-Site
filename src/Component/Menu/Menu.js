@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Image from "../Image/Image";
 // import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 // import { Carousel } from 'react-responsive-carousel';
 
@@ -54,16 +55,20 @@ function Menu() {
         <div className="menu">
             <div className="menu-title">
                 <div className="menu-title-name"> Our Menu </div>
-                <div className="menu-title-img"><img src="https://mamaearthp.imgix.net/wysiwyg/strip2x.png?auto=format" alt="underline" /></div>
+                <div className="menu-title-img">
+                    <Image path="https://mamaearthp.imgix.net/wysiwyg/strip2x.png?auto=format" />
+                </div>
             </div>
             <div className="menu-content flexRow">
                 {
                     menu.map((item, index) => {
-                    return <>
-                        <Link to={item.type} key={index} className="menu-item">
-                            <div className="menu-item-img"><img src={item.img} alt="item" /></div>
-                            <div className="menu-item-name">{item.name}</div>
-                        </Link>
+                        return <>
+                            <Link to={item.type} key={index} className="menu-item">
+                                <div className="menu-item-img">
+                                    <Image path={item.img} />
+                                </div>
+                                <div className="menu-item-name">{item.name}</div>
+                            </Link>
                             {/* <Carousel {...getConfigurableProps()} animationHandler="fade" className="react-carousel">
                             {
                                 item.imagesT.map((im,index) => {
@@ -74,7 +79,7 @@ function Menu() {
                         </>
                     })
                 }
-        </div>
+            </div>
         </div >
     )
 }

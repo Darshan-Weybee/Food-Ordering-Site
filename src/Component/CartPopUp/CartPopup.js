@@ -1,6 +1,6 @@
 import React from "react";
 
-function Popup(){
+function CartPopup(){
 
     return (
         <div className="popup flexRow">
@@ -13,4 +13,4 @@ function Popup(){
     )
 }
 
-export default Popup
+export default CartPopup

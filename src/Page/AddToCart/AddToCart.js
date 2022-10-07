@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Image from "../../Component/Image/Image";
 import { addItems, deleteItem } from "../../redux/reducer/addToCart/AddToCartReducer";
 
 function AddToCart({ cartData, cartDispatch, deleteDispatch }) {
@@ -21,7 +22,7 @@ function AddToCart({ cartData, cartDispatch, deleteDispatch }) {
 const EmptyCart = () => {
     return <div className="empty-cart">
         <div className="empty-cart-img">
-            <img src="https://food-g-app.web.app/static/media/empty-cart.f9db2821.svg" alt="cart-empty" />
+            <Image path="https://food-g-app.web.app/static/media/empty-cart.f9db2821.svg" />
         </div>
         <h2 className="empty-cart-text">Your cart  is empty 🍔</h2>
     </div>
@@ -31,7 +32,7 @@ const CartInformation = ({ cartData, cartDispatch, deleteDispatch }) => {
     return cartData.map((unit, index) => {
         return <div key={index} className="addToCart-item flexRow">
             <div className="addToCart-item-img">
-                <img src={unit.data.img} alt="cartFood" onError={imgNotFound} />
+                <Image path={unit.data.img}/>
             </div>
             <div className="addToCart-item-content">
                 <div className="addToCart-item-name">{unit.data.name}</div>
@@ -57,11 +58,6 @@ const quantityDecrease = (unit, cartDispatch) => {
 
 const quantityIncrease = (unit, cartDispatch) => {
     cartDispatch(unit.data, unit.quantity + 1)
-}
-
-const imgNotFound = event => {
-    event.target.src = 'https://bookmychefs.com/uploads/dish/default_food.jpg'
-    event.onerror = null
 }
 
 const totalAmount = dataLocal => {

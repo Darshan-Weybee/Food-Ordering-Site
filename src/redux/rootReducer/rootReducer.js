@@ -4,6 +4,8 @@ import FavouriteReducer from "../reducer/favourite/FavouriteReducer";
 import RecentReducer from "../reducer/recent/RecentReducer";
 import productDataReducer from "../reducer/productListing/productDataReducer";
 import productDetailsReducer from "../reducer/productDetails/productDetailsReducer";
+import totalItemsReducer from "../reducer/totalItems/totalItemsReducer";
+import bestFoodDataReducer from "../reducer/bestFoodData/bestFoodDataReducer";
 
 export const rootReducer = combineReducers({
     productList : productDataReducer,
@@ -11,4 +13,6 @@ export const rootReducer = combineReducers({
     cart : AddToCartReducer,
     favourite : FavouriteReducer,
     recent : RecentReducer,
+    totalItems : totalItemsReducer,
+    bestFood : bestFoodDataReducer
 })

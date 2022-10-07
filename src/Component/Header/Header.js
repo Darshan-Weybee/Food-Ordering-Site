@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "../Image/Image";
 
 function Header(){
     return(
@@ -16,10 +17,10 @@ function Header(){
                     </div>
                 </div>
                 <div className="header-middle-right">
-                    <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?cs=srgb&dl=pexels-ella-olsson-1640777.jpg&fm=jpg" alt="headerImage"/>
+                    <Image path="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?cs=srgb&dl=pexels-ella-olsson-1640777.jpg&fm=jpg"/>
                 </div>
                 <div className="header-side-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdt2fPFJh6-z7BqNx6htg2XoAXg4ssDbd31EOL7ay66NZu7aNmZoNYKGg2dYi61WTipS8&usqp=CAU" alt="food"/>
+                    <Image path="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdt2fPFJh6-z7BqNx6htg2XoAXg4ssDbd31EOL7ay66NZu7aNmZoNYKGg2dYi61WTipS8&usqp=CAU"/>
                 </div>
             </div>
         </div>

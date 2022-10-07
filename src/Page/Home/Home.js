@@ -1,25 +1,29 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "../../Component/Header/Header";
 import FeedBack from "../../Component/feedback/FeedBack";
 import Menu from "../../Component/Menu/Menu";
 import Loader from "../../Component/Loader/Loader"
 import { useNavigate, Link } from "react-router-dom";
 import Recent from "../../Component/Recent/Recent";
-import { addItems } from "../../redux/reducer/addToCart/AddToCartReducer";
-import { addFavItems } from "../../redux/reducer/favourite/FavouriteReducer";
 import { connect } from "react-redux";
+import { fetchTotalNoOfItems } from "../../redux/reducer/totalItems/fetchTotalItems";
+import Image from "../../Component/Image/Image";
+import OnHoverFavouriteIcon from "../../Component/OnHoverFavouriteIcon/OnHoverFavouriteIcon";
+import { fetchBestFoodData } from "../../redux/reducer/bestFoodData/fetchBestFoodData";
+import OnHoverCartIcon from "../../Component/OnHoverCartIcon/OnHoverCartIcon";
 
-function Home({ favDispatch, cartDispatch }) {
+function Home({ bestFood, totalItems, bestFoodDataDispatch, totalItemsDispatch }) {
     const navigate = useNavigate();
-    const [setIsVisible] = useState(false);
-    const [setFavIsVisible] = useState(false);
 
-    const [bestFood, setBestFood] = useState([]);
     useEffect(() => {
-        axios.get("https://ig-food-menus.herokuapp.com/best-foods?_limit=8")
-            .then(res => setBestFood(res.data));
-    }, []);
+        if(+bestFood.data.length !== 0) return;
+        bestFoodDataDispatch();
+    }, [bestFoodDataDispatch, bestFood.data.length]);
+
+    useEffect(() => {
+        if(totalItems.data) return;
+        totalItemsDispatch();
+    },[totalItemsDispatch,totalItems.data])
 
     return (
         <div>
@@ -32,8 +36,8 @@ function Home({ favDispatch, cartDispatch }) {
                         <div className="home-bestFood-title-btn"><button className="home-bestFood-title-VBtn" onClick={() => navigate("best-foods")}>View All <i class="fa-solid fa-arrow-right"></i> </button></div>
                     </div>
                     <div className="home-bestFood-content flexRow">
-                        {+bestFood.length === 0 && <Loader />}
-                        {+bestFood.length !== 0 && bestFood.map((item, index) => <Food item={item} index={index} setFavIsVisible={setFavIsVisible} favDispatch={favDispatch} setIsVisible={setIsVisible} cartDispatch={cartDispatch} />)}
+                        {bestFood.loading && <Loader />}
+                        {bestFood.data && <RenderBestFoodData bestFoodData={bestFood.data}/>}
                     </div>
                 </div>
             </div>
@@ -43,36 +47,13 @@ function Home({ favDispatch, cartDispatch }) {
     )
 }
 
-const onClickFav = (setFavIsVisible, favDispatch, e, data) => {
-    setFavIsVisible(true);
-    setTimeout(() => {
-        setFavIsVisible(false);
-    }, 1000)
-    favDispatch(data)
-}
-
-
-const onClickCart = (setIsVisible, cartDispatch, e, data) => {
-    setIsVisible(true);
-    setTimeout(() => {
-        setIsVisible(false);
-    }, 1000)
-    cartDispatch(data, 1)
-}
-
-const DisplayHoverItem = ({ setFavIsVisible, favDispatch, setIsVisible, cartDispatch, item }) => {
-    return <div className="home-hover-item">
-        <div className="home-hover-item-fav home-hover-effect-btn" onClick={e => onClickFav(setFavIsVisible, favDispatch, e, item)}><i class="fa-regular fa-heart"></i></div>
-        <div className="home-hover-item-cart home-hover-effect-btn" onClick={e => onClickCart(setIsVisible, cartDispatch, e, item)}><i class="fa-solid fa-cart-shopping"></i></div>
-    </div>
-}
-
-const Food = ({ item, index, setFavIsVisible, favDispatch, setIsVisible, cartDispatch }) => {
-    return (
-        <Link key={index} to={`best-foods/${item.id}`} className="home-bestFood-item">
-            <DisplayHoverItem setFavIsVisible={setFavIsVisible} favDispatch={favDispatch} setIsVisible={setIsVisible} cartDispatch={cartDispatch} item={item} />
+const RenderBestFoodData = ({bestFoodData}) => {
+    return bestFoodData.map((item, index) => {
+        return <Link key={index} to={`best-foods/${item.id}`} className="home-bestFood-item">
+           <OnHoverFavouriteIcon data={item}/>
+           <OnHoverCartIcon data={item} quantity={1}/>
             <div className="home-bestFood-item-img">
-                <img src={item.img} alt={item.name} onError={imgNotFound} />
+                <Image path={item.img}/>
             </div>
             <div className="home-bestFood-item-desc">
                 <div className="home-bestFood-item-desc-dsc">{item.dsc}</div>
@@ -82,19 +63,21 @@ const Food = ({ item, index, setFavIsVisible, favDispatch, setIsVisible, cartDis
             <div className="home-bestFood-item-rate">{item.rate} <i class="fa-sharp fa-solid fa-star"></i></div>
         </Link>
 
-    )
+    })
 }
 
-const imgNotFound = event => {
-    event.target.src = 'https://bookmychefs.com/uploads/dish/default_food.jpg'
-    event.onerror = null
+const mapStateToProps = state => {
+    return {
+        bestFood : state.bestFood,
+        totalItems : state.totalItems
+    }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        cartDispatch: (data, quantity) => dispatch(addItems(data, quantity)),
-        favDispatch: data => dispatch(addFavItems(data)),
+        totalItemsDispatch : () => dispatch(fetchTotalNoOfItems()),
+        bestFoodDataDispatch : () => dispatch(fetchBestFoodData())
     }
 }
 
-export default connect(null, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

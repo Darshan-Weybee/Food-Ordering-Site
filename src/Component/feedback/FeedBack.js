@@ -1,11 +1,11 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Image from "../Image/Image"
 
 import React from "react";
 
 const responsive = {
     superLargeDesktop: {
-        // the naming can be any, depends on you.
         breakpoint: { max: 4000, min: 3000 },
         items: 5
     },
@@ -67,7 +67,9 @@ function FeedBack() {
         <div className="feedback">
             <div className="feedback-title">
                 <div className="feedback-title-name">What Our Customers Say</div>
-                <div className="feedback-title-img"><img src="https://mamaearthp.imgix.net/wysiwyg/strip2x.png?auto=format" alt="underline" /></div>
+                <div className="feedback-title-img">
+                    <Image path="https://mamaearthp.imgix.net/wysiwyg/strip2x.png?auto=format"/>
+                </div>
             </div>
 
             <Carousel
@@ -76,10 +78,8 @@ function FeedBack() {
                 responsive={responsive}
                 infinite={true}
                 showDots={true}
-                // autoPlay={this.props.deviceType !== "mobile" ? true : false}s
                 autoPlaySpeed={1000}
                 keyBoardControl={true}
-                // customTransition="all .5"
                 transitionDuration={500}
                 containerClass="carousel-container"
                 dotListClass="custom-dot-list-style"
