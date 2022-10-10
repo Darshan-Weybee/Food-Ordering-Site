@@ -2,7 +2,7 @@ import { FETCH_BEST_FOOD_DATA_FAILURE, FETCH_BEST_FOOD_DATA_REQUEST, FETCH_BEST_
 
 const initialState = {
     loading : false,
-    data : [],
+    itemDetails : [],
     error : ""
 }
 
@@ -15,13 +15,13 @@ const bestFoodDataReducer = (state = initialState, action) => {
         case FETCH_BEST_FOOD_DATA_SUCCESS : return {
             ...state,
             loading : false,
-            data : action.payload,
+            itemDetails : action.payload,
             error : ""
         }
         case FETCH_BEST_FOOD_DATA_FAILURE : return {
             ...state,
             loading : false,
-            data : [],
+            itemDetails : [],
             error : action.payload
         }
 

@@ -22,11 +22,16 @@ const fetchDataCountFailure = error => {
     }
 }
 
-export const fetchDataForCount = (type, searchParam) => {
+export const fetchDataForCount = (type, searchObj) => {
+    delete searchObj["_limit"];
+    delete searchObj["_page"];
+
+    const urlString = new URLSearchParams(searchObj);
+
     return dispatch => {
         dispatch(fetchDataCountRequests());
 
-        fetch(`https://ig-food-menus.herokuapp.com/${type}?${searchParam}`)
+       fetch(`https://ig-food-menus.herokuapp.com/${type}?${urlString}`)
         .then(response => response.json())
         .then(res => dispatch(fetchDataCountSuccess(res)))
         .catch(error => dispatch(fetchDataCountFailure(error.message)))

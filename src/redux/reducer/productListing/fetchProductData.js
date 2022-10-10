@@ -22,15 +22,16 @@ const fetchProductDataFailure = error => {
     }
 }
 
-export const fetchProductData = (type,parameter) => {
-    if(parameter === "")
-        parameter = "_limit=16&_page=1";
+export const fetchProductData = (type,searchObj) => {
+    if(!searchObj["_limit"]){
+        searchObj = {_limit: 16, _page: 1};
+}
+    const urlString = new URLSearchParams(searchObj);
 
-    console.log(parameter);
     return dispatch => {
         dispatch(fetchProductDataRequests());
 
-        fetch(`https://ig-food-menus.herokuapp.com/${type}?${parameter}`)
+        fetch(`https://ig-food-menus.herokuapp.com/${type}?${urlString}`)
         .then(response => response.json())
         .then(res => dispatch(fetchProductDataSuccess(res)))
         .catch(error => dispatch(fetchProductDataFailure(error.message)))

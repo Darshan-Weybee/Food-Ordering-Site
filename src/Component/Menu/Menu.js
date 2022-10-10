@@ -63,7 +63,7 @@ function Menu() {
                 {
                     menu.map((item, index) => {
                         return <>
-                            <Link to={item.type} key={index} className="menu-item">
+                            <Link key={index} to={item.type} className="menu-item">
                                 <div className="menu-item-img">
                                     <Image path={item.img} />
                                 </div>

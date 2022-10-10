@@ -2,7 +2,7 @@ import { FETCH_PRODUCT_DETAILS_FAILURE, FETCH_PRODUCT_DETAILS_REQUEST, FETCH_PRO
 
 const initialState = {
     loading : false,
-    data : [],
+    item : null,
     error : ""
 }
 
@@ -15,13 +15,13 @@ const productDetailsReducer = (state = initialState, action) => {
         case FETCH_PRODUCT_DETAILS_SUCCESS : return {
             ...state,
             loading : false,
-            data : action.payload,
+            item : action.payload,
             error : ""
         }
         case FETCH_PRODUCT_DETAILS_FAILURE : return {
             ...state,
             loading : false,
-            data : [],
+            item : [],
             error : action.payload
         }
 

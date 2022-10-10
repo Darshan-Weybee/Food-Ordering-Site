@@ -23,8 +23,8 @@ function Search() {
 
 const SearchBar = ({inputRef, searchObj, setSearch}) => {
     return <div className="search flexRow">
-        <input type="text" ref={inputRef} placeholder="Search your product" onKeyDown={e => { if (e.key === "Enter") setSearch({ ...searchObj, _limit: 16, name_like: e.target.value }) }} />
-        <button onClick={() => setSearch({ ...searchObj, _limit: 16, name_like: inputRef.current.value })}><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" ref={inputRef} placeholder="Search your product" onKeyDown={e => { if (e.key === "Enter") setSearch({ ...searchObj, _limit: 16, _page: 1, name_like: e.target.value }) }} />
+        <button onClick={() => setSearch({ ...searchObj, _limit: 16, _page: 1, name_like: inputRef.current.value })}><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 }
 

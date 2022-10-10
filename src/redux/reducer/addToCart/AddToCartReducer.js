@@ -1,33 +1,34 @@
 const initialState = [];
-let isThere = false;
-let lcData = [];
+const ADD_ITEMS = "ADD_ITEMS";
+const DELETE_ITEM = "DELETE_ITEM";
 
 const AddToCartReducer = (state = initialState, action) => {
     
-    isThere = false;
     let temp = JSON.parse(localStorage.getItem("items"));
     temp = temp !== null ? temp : initialState;
 
     switch(action.type){
-        case "ADD_ITEMS" : 
+        case ADD_ITEMS : 
+        let isThere = false;
+        let lcData = [];
         
-        temp = temp.map(st => {
-            if(action.payload.id === st.data.id){
+        temp = temp.map(item => {
+            if(action.payload.data.id === item.data.id){
                 isThere = true;
                 return {
-                    data : action.payload,
-                    quantity : action.quantity
+                    ...action.payload,
+                    quantity : action.payload.quantity
                 }
             }
-            return st;
+            return item;
         })
 
-        lcData =  isThere ? temp : [...temp, {data : action.payload, quantity : action.quantity}]
+        lcData =  isThere ? temp : [...temp, {data : action.payload.data, quantity : action.payload.quantity}]
         localStorage.setItem("items", JSON.stringify(lcData));
         return lcData;
 
-        case "DELETE_ITEM" : 
-            temp =  temp.filter(st => st.data.id !== action.payload.id)
+        case DELETE_ITEM : 
+            temp =  temp.filter(item => item.data.id !== action.payload)
             localStorage.setItem("items", JSON.stringify(temp));
             return temp;
 
@@ -37,16 +38,15 @@ const AddToCartReducer = (state = initialState, action) => {
 
 export function addItems(data, quant){
     return {
-        type : "ADD_ITEMS",
-        payload : data,
-        quantity : quant
+        type : ADD_ITEMS,
+        payload : {data: data, quantity : quant}
     }
 }
 
-export function deleteItem(data){
+export function deleteItem(dataId){
     return{
-        type : "DELETE_ITEM",
-        payload : data
+        type : DELETE_ITEM,
+        payload : dataId
     }
 }
 

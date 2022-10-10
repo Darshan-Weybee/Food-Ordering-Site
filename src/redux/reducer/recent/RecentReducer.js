@@ -1,42 +1,39 @@
 const initialState = [];
-let isThere = false;
-let lcData = [];
+const ADD_RECENT_ITEMS = "ADD_RECENT_ITEMS";
 
 const RecentReducer = (state = initialState, action) => {
-    isThere = false;
     let temp = JSON.parse(localStorage.getItem("recent"));
     temp = temp !== null ? temp : initialState;
 
+    switch (action.type) {
 
-    switch(action.type){
-        
-        case "ADD_RECENT_ITEMS" : 
-        
-        temp = temp.map(st => {
+        case ADD_RECENT_ITEMS:
+            let isThere = false;
+            let lcData = [];
 
-            if(action.payload.id === st.data.id){
-                isThere = true;
-                return {
-                    data : action.payload,
-                    num : st.num + 1,
-                    typeOfItem : action.typeOfItem
+            temp = temp.map(item => {
+
+                if (action.payload.data.id === item.data.id) {
+                    isThere = true;
+                    return {
+                        ...action.payload,
+                        num: item.num + 1
+                    }
                 }
-            }
-            return st;
-        })
-        lcData =  isThere ? temp : [...temp, {data : action.payload, typeOfItem : action.typeOfItem, num : 1}]
-        localStorage.setItem("recent", JSON.stringify(lcData));
-        return lcData;
+                return item;
+            })
+            lcData = isThere ? temp : [...temp, { data: action.payload.data, typeOfItem: action.payload.typeOfItem, num: 1}]
+            localStorage.setItem("recent", JSON.stringify(lcData));
+            return lcData;
 
-        default : return temp;
+        default: return temp;
     }
 }
 
-export function addRecentItems(data, type){
+export function addRecentItems(data, type) {
     return {
-        type : "ADD_RECENT_ITEMS",
-        payload : data,
-        typeOfItem : type
+        type: ADD_RECENT_ITEMS,
+        payload: {data: data, typeOfItem: type}
     }
 }
 

@@ -9,6 +9,7 @@
     position: fixed;
     right: 2%;
     top: 9%;
+    z-index: 999;
 }
 
 .popup-fav-s-icon{

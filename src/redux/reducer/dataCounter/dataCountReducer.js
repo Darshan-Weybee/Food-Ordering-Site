@@ -2,7 +2,7 @@ import { FETCH_DATA_COUNT_FAILURE, FETCH_DATA_COUNT_REQUEST, FETCH_DATA_COUNT_SU
 
 const initialState = {
     loading : false,
-    data : [],
+    totalItems : [],
     error : ""
 }
 
@@ -15,13 +15,13 @@ const dataCountReducer = (state = initialState, action) => {
         case FETCH_DATA_COUNT_SUCCESS : return {
             ...state,
             loading : false,
-            data : action.payload,
+            totalItems : action.payload,
             error : ""
         }
         case FETCH_DATA_COUNT_FAILURE : return {
             ...state,
             loading : false,
-            data : [],
+            totalItems : [],
             error : action.payload
         }
 

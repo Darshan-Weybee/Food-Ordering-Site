@@ -17,46 +17,50 @@ function ProductDetails({ productInfo, recentDispatch, productDetailsDispatch })
     }, [params.id, params.type, productDetailsDispatch])
 
     useEffect(() => {
-        recentDispatch(productInfo.data, params.type);
-    }, [params.type, productInfo.data, recentDispatch])
+        if(productInfo.item){
+            recentDispatch(productInfo.item, params.type);
+        }
+    }, [])
+
+    const RenderProductDetails = () => {
+
+        const increaseQuantity = () => {
+            setQuantity(pst => pst + 1)
+        }
+        
+        const decreaseQuantity = () => {
+            setQuantity(pst => pst === 1 ? 1 : pst - 1)
+        }
+
+        return <div className="productDetails flexRow">
+            <div className="productDetails-img">
+                <Image path={productInfo.item.img} />
+            </div>
+            <div className="productDetails-content">
+                <div className="productDetails-name">{productInfo.item.name}</div>
+                <div className="productDetails-dsc">{productInfo.item.dsc}</div>
+                <div className="productDetails-price"> $ {productInfo.item.price}</div>
+                <div className="productDetails-rate">{productInfo.item.rate} <i className="fa-sharp fa-solid fa-star"></i></div>
+                <div className="productDetails-buttons">
+                    <button className="productDetails-nbtn" onClick={() => decreaseQuantity()}>-</button>
+                    <span className="productDetails-quan">{quantity}</span>
+                    <button className="productDetails-abtn" onClick={() => increaseQuantity()}>+</button>
+                </div>
+                <div className="productDetails-cart">
+                    <button className="productDetails-cart-btn"><OnHoverCartIcon data={productInfo.item} quantity={quantity}/></button>
+                    <button className="productDetails-cart-fav"><OnHoverFavouriteIcon data={productInfo.item}/></button>
+                </div>
+            </div>
+        </div>
+    }
 
     return (
         <div>
             {productInfo.loading && <Loader />}
-            {productInfo.data && <RenderProductDetails productInfo={productInfo} quantity={quantity} setQuantity={setQuantity}/>}
+            {productInfo.error && productInfo.error}
+            {productInfo.item && <RenderProductDetails/>}
         </div>
     )
-}
-
-const RenderProductDetails = ({productInfo, quantity, setQuantity}) => {
-    return <div className="productDetails flexRow">
-        <div className="productDetails-img">
-            <Image path={productInfo.data.img} />
-        </div>
-        <div className="productDetails-content">
-            <div className="productDetails-name">{productInfo.data.name}</div>
-            <div className="productDetails-dsc">{productInfo.data.dsc}</div>
-            <div className="productDetails-price"> $ {productInfo.data.price}</div>
-            <div className="productDetails-rate">{productInfo.data.rate} <i className="fa-sharp fa-solid fa-star"></i></div>
-            <div className="productDetails-buttons">
-                <button className="productDetails-nbtn" onClick={() => decreaseQuantity(setQuantity)}>-</button>
-                <span className="productDetails-quan">{quantity}</span>
-                <button className="productDetails-abtn" onClick={() => increaseQuantity(setQuantity)}>+</button>
-            </div>
-            <div className="productDetails-cart">
-                <button className="productDetails-cart-btn"><OnHoverCartIcon data={productInfo.data} quantity={quantity}/></button>
-                <button className="productDetails-cart-fav"><OnHoverFavouriteIcon data={productInfo.data}/></button>
-            </div>
-        </div>
-    </div>
-}
-
-const increaseQuantity = (setQuantity) => {
-    setQuantity(pst => pst + 1)
-}
-
-const decreaseQuantity = (setQuantity) => {
-    setQuantity(pst => pst === 1 ? 1 : pst - 1)
 }
 
 const mapStateToProps = state => {

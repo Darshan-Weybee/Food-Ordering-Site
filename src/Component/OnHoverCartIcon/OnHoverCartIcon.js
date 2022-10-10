@@ -11,7 +11,6 @@ function OnHoverCartIcon({ cartDispatch, data, quantity }) {
                 <i class="fa-solid fa-cart-shopping"></i>
             </div>
             {isCartVisible && <CartPopup />}
-            {/* { <CartPopup />} */}
         </>
     )
 
