@@ -52,7 +52,7 @@ function Home({ bestFood, bestFoodDataDispatch }) {
     }
 
     const RecommendedForYou = () => {
-        <div className="home-bestFood-title flexRow">
+        return <div className="home-bestFood-title flexRow">
             <div className="home-bestFood-title-name">Recommended for You</div>
             <div className="home-bestFood-title-btn"><button className="home-bestFood-title-VBtn" onClick={() => navigate("best-foods")}>View All <i class="fa-solid fa-arrow-right"></i> </button></div>
         </div>
