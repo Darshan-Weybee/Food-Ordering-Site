@@ -14,7 +14,6 @@ function OnHoverCartIcon({ cartDispatch, data, quantity }) {
         }, 1000)
         cartDispatch(data, quantity)
     }
-
     return (
         <>
             <div className="on-hover-cart" onClick={onClickCart}>

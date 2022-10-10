@@ -9,7 +9,7 @@ import AddToCart from './Page/AddToCart/AddToCart';
 import Favourite from './Page/Favourite/Favourite';
 import { useEffect } from 'react';
 import { beforeUnload } from './redux/reducer/BeforeUnload/beforeUnload';
-
+// {cartItems, favouriteItems, recentItems}
 function App({cartItems, favouriteItems, recentItems}) {
 
   useEffect(() => {
@@ -46,3 +46,4 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(App);
+// export default App
