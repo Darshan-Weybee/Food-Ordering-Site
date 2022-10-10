@@ -5,9 +5,19 @@ import FavPopup from "../FavPopUp/FavPopup"
 
 function OnHoverFavouriteIcon({ favouriteDispatch, data }) {
     const [favIsVisible, setFavIsVisible] = useState(false);
+
+    const onClickFav = e => {
+        e.preventDefault();
+        setFavIsVisible(true);
+        setTimeout(() => {
+            setFavIsVisible(false);
+        }, 1000)
+        favouriteDispatch(data)
+    }
+
     return (
         <>
-        <div className="on-hover-fav"onClick={e => onClickFav(setFavIsVisible, favouriteDispatch, e, data)}>
+        <div className="on-hover-fav"onClick={onClickFav}>
             <i class="fa-regular fa-heart"></i>
         </div>
         {favIsVisible && <FavPopup/>}
@@ -15,20 +25,10 @@ function OnHoverFavouriteIcon({ favouriteDispatch, data }) {
     )
 }
 
-const onClickFav = (setFavIsVisible, favouriteDispatch, e, data) => {
-    e.preventDefault();
-    setFavIsVisible(true);
-    setTimeout(() => {
-        setFavIsVisible(false);
-    }, 1000)
-    favouriteDispatch(data)
-}
-
 const mapDispatchToProps = dispatch => {
     return {
         favouriteDispatch: data => dispatch(addFavItems(data)),
     }
 }
-
 
 export default connect(null, mapDispatchToProps)(OnHoverFavouriteIcon)

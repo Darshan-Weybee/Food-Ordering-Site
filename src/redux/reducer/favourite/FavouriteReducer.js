@@ -1,10 +1,9 @@
-const initialState = [];
+const initialState = JSON.parse(localStorage.getItem("fav")) || [];
+console.log(JSON.parse(localStorage.getItem("fav")));
 const ADD_FAV_ITEMS = "ADD_FAV_ITEMS";
 const DELETE_FAV_ITEM = "DELETE_FAV_ITEM";
 
 const FavouriteReducer = (state = initialState, action) => {
-    let temp = JSON.parse(localStorage.getItem("fav"));
-    temp = temp !== null ? temp : initialState;
 
     switch (action.type) {
         case ADD_FAV_ITEMS:
@@ -12,7 +11,7 @@ const FavouriteReducer = (state = initialState, action) => {
             let isThere = false;
             let lcData = [];
 
-            temp = temp.map(st => {
+            state = state.map(st => {
                 if (action.payload.id === st.data.id) {
                     isThere = true;
                     return {
@@ -22,16 +21,16 @@ const FavouriteReducer = (state = initialState, action) => {
                 return st;
             })
 
-            lcData = isThere ? temp : [...temp, { data: action.payload }]
-            localStorage.setItem("fav", JSON.stringify(lcData));
+            lcData = isThere ? state : [...state, { data: action.payload }]
+            // localStorage.setItem("fav", JSON.stringify(lcData));
             return lcData;
 
         case DELETE_FAV_ITEM:
-            temp = temp.filter(st => st.data.id !== action.payload)
-            localStorage.setItem("fav", JSON.stringify(temp));
-            return temp;
+            state = state.filter(st => st.data.id !== action.payload)
+            // localStorage.setItem("fav", JSON.stringify(state));
+            return state;
 
-        default: return temp;
+        default: return state;
     }
 }
 
@@ -48,5 +47,4 @@ export function deleteFavItem(dataId) {
         payload: dataId
     }
 }
-
 export default FavouriteReducer

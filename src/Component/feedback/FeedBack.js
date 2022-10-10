@@ -1,7 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Image from "../Image/Image"
-
+import Image from "../Image/Image";
 import React from "react";
 
 const responsive = {

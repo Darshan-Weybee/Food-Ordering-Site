@@ -9,7 +9,7 @@ function Search() {
     const searchObj  = useMemo(()=>{
         const params = {};
         search.forEach((value,key)=>params[key]=value)
-        return {...params} 
+        return {...params}
     },[search])
     
 

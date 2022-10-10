@@ -3,15 +3,27 @@ import './App.css';
 import Navbar from './Component/Navbar/Navbar';
 import Home from './Page/Home/Home';
 import Product from './Page/Product/Product';
-import { Provider } from 'react-redux';
-import store from './redux/rootReducer/store';
+import { connect } from 'react-redux';
 import ProductDetails from './Page/ProductDetails/ProductDetails';
 import AddToCart from './Page/AddToCart/AddToCart';
 import Favourite from './Page/Favourite/Favourite';
+import { useEffect } from 'react';
+import { beforeUnload } from './redux/reducer/BeforeUnload/beforeUnload';
 
-function App() {
+function App({cartItems, favouriteItems, recentItems}) {
+
+  useEffect(() => {
+
+    function unloadFun(){
+      beforeUnload(cartItems, favouriteItems, recentItems);
+    }
+    
+    window.addEventListener("beforeunload", unloadFun)
+
+    return () => window.removeEventListener("beforeunload", unloadFun);
+  },[cartItems, favouriteItems, recentItems])
+
   return (
-    <Provider store={store}>
     <div className="App">
        <Navbar/>
        <Routes>
@@ -22,8 +34,15 @@ function App() {
           <Route path='/favourite' element={<Favourite/>}/>
        </Routes>
     </div>
-    </Provider>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    cartItems : state.cart,
+    favouriteItems : state.favourite,
+    recentItems : state.recent
+  }
+}
+
+export default connect(mapStateToProps)(App);

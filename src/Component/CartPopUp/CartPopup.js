@@ -1,7 +1,7 @@
 import React from "react";
 
 function CartPopup(){
-
+    {console.log("cartpopup")}
     return (
         <div className="popup flexRow">
             <div className="popup-s-icon"><i class="fa-solid fa-check"></i></div>

@@ -27,6 +27,7 @@ function Product({ dataState, productDispatch, dataCountDispatch, totalData }) {
     },[search])
 
     useEffect(() => {
+        console.log(searchObj);
         productDispatch(params.type, searchObj);
     }, [productDispatch, params.type, searchObj]);
     

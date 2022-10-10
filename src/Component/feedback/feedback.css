@@ -33,6 +33,12 @@
     box-shadow: rgb(235 234 232) 0px -2px 6px 3px;
     background-color: white;
     border-radius: 1rem;
+    margin: 0 2rem;
+    min-height: 90%;
+}
+
+.react-multi-carousel-track{
+    align-items: center;
 }
 
 .feedback-item-desc{

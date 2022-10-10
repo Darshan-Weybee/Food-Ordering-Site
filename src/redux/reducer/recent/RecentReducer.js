@@ -1,9 +1,8 @@
-const initialState = [];
+const initialState = JSON.parse(localStorage.getItem("recent")) || [];
+console.log(JSON.parse(localStorage.getItem("recent")));
 const ADD_RECENT_ITEMS = "ADD_RECENT_ITEMS";
 
 const RecentReducer = (state = initialState, action) => {
-    let temp = JSON.parse(localStorage.getItem("recent"));
-    temp = temp !== null ? temp : initialState;
 
     switch (action.type) {
 
@@ -11,7 +10,7 @@ const RecentReducer = (state = initialState, action) => {
             let isThere = false;
             let lcData = [];
 
-            temp = temp.map(item => {
+            state = state.map(item => {
 
                 if (action.payload.data.id === item.data.id) {
                     isThere = true;
@@ -22,11 +21,11 @@ const RecentReducer = (state = initialState, action) => {
                 }
                 return item;
             })
-            lcData = isThere ? temp : [...temp, { data: action.payload.data, typeOfItem: action.payload.typeOfItem, num: 1}]
-            localStorage.setItem("recent", JSON.stringify(lcData));
+            lcData = isThere ? state : [...state, { data: action.payload.data, typeOfItem: action.payload.typeOfItem, num: 1}]
+            // localStorage.setItem("recent", JSON.stringify(lcData));
             return lcData;
 
-        default: return temp;
+        default: return state;
     }
 }
 
