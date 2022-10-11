@@ -6,8 +6,7 @@
 @import "../Page/Product/product.css";
 @import "../Page/ProductDetails/productDetails.css";
 @import "../Page/AddToCart/addToCart.css";
-@import "./CartPopUp/cartPopup.css";
+@import "./PopUp/popup.css";
 @import "./Loader/Loader.css";
 @import "../Page/Favourite/favourite.css";
-@import "./FavPopUp/favPopup.css";
 @import "./Recent/recent.css";

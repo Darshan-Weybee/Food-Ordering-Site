@@ -1,33 +1,31 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addFavItems } from "../../redux/reducer/favourite/FavouriteReducer";
-import FavPopup from "../FavPopUp/FavPopup"
+import { popupNotVisible, popupVisible } from "../../redux/reducer/popup/popupreducer";
 
-function OnHoverFavouriteIcon({ favouriteDispatch, data }) {
-    const [favIsVisible, setFavIsVisible] = useState(false);
+function OnHoverFavouriteIcon({ favouriteDispatch, data , popupHideDispatch, popupVisibleDispatch}) {
 
     const onClickFav = e => {
         e.preventDefault();
-        setFavIsVisible(true);
+        popupVisibleDispatch("The product has been added to your favourites","fav");
         setTimeout(() => {
-            setFavIsVisible(false);
+            popupHideDispatch();
         }, 1000)
         favouriteDispatch(data)
     }
 
     return (
-        <>
-        <div className="on-hover-fav"onClick={onClickFav}>
+        <div className="on-hover-fav" onClick={onClickFav}>
             <i class="fa-regular fa-heart"></i>
         </div>
-        {favIsVisible && <FavPopup/>}
-        </>
     )
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         favouriteDispatch: data => dispatch(addFavItems(data)),
+        popupVisibleDispatch : (msg, type) => dispatch(popupVisible(msg, type)),
+        popupHideDispatch : () => dispatch(popupNotVisible())
     }
 }
 

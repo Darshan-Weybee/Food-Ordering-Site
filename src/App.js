@@ -9,8 +9,9 @@ import AddToCart from './Page/AddToCart/AddToCart';
 import Favourite from './Page/Favourite/Favourite';
 import { useEffect } from 'react';
 import { beforeUnload } from './redux/reducer/BeforeUnload/beforeUnload';
-// {cartItems, favouriteItems, recentItems}
-function App({cartItems, favouriteItems, recentItems}) {
+import Popup from './Component/PopUp/Popup';
+
+function App({cartItems, favouriteItems, recentItems, popup}) {
 
   useEffect(() => {
 
@@ -33,6 +34,7 @@ function App({cartItems, favouriteItems, recentItems}) {
           <Route path='/addtocart' element={<AddToCart/>}/>
           <Route path='/favourite' element={<Favourite/>}/>
        </Routes>
+       {popup.isVisible && <Popup message={popup.message} type={popup.type}/>}
     </div>
   );
 }
@@ -41,9 +43,9 @@ const mapStateToProps = state => {
   return {
     cartItems : state.cart,
     favouriteItems : state.favourite,
-    recentItems : state.recent
+    recentItems : state.recent,
+    popup : state.popup
   }
 }
 
 export default connect(mapStateToProps)(App);
-// export default App

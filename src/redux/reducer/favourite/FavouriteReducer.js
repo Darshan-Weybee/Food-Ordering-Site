@@ -1,5 +1,4 @@
 const initialState = JSON.parse(localStorage.getItem("fav")) || [];
-console.log(JSON.parse(localStorage.getItem("fav")));
 const ADD_FAV_ITEMS = "ADD_FAV_ITEMS";
 const DELETE_FAV_ITEM = "DELETE_FAV_ITEM";
 
@@ -22,12 +21,10 @@ const FavouriteReducer = (state = initialState, action) => {
             })
 
             lcData = isThere ? state : [...state, { data: action.payload }]
-            // localStorage.setItem("fav", JSON.stringify(lcData));
             return lcData;
 
         case DELETE_FAV_ITEM:
             state = state.filter(st => st.data.id !== action.payload)
-            // localStorage.setItem("fav", JSON.stringify(state));
             return state;
 
         default: return state;

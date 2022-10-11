@@ -1,5 +1,4 @@
 const initialState = JSON.parse(localStorage.getItem("items")) || [];
-console.log(JSON.parse(localStorage.getItem("items")));
 const ADD_ITEMS = "ADD_ITEMS";
 const DELETE_ITEM = "DELETE_ITEM";
 
@@ -22,12 +21,10 @@ const AddToCartReducer = (state = initialState, action) => {
         })
 
         lcData =  isThere ? state : [...state, {data : action.payload.data, quantity : action.payload.quantity}]
-        // localStorage.setItem("items", JSON.stringify(lcData));
         return lcData;
 
         case DELETE_ITEM : 
-            state =  state.filter(item => item.data.id !== action.payload)
-            // localStorage.setItem("items", JSON.stringify(temp));
+            state = state.filter(st => st.data.id !== action.payload)
             return state;
 
         default :  return state;

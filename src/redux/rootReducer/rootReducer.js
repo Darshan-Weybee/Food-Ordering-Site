@@ -6,6 +6,7 @@ import productDataReducer from "../reducer/productListing/productDataReducer";
 import productDetailsReducer from "../reducer/productDetails/productDetailsReducer";
 import bestFoodDataReducer from "../reducer/bestFoodData/bestFoodDataReducer";
 import dataCountReducer from "../reducer/dataCounter/dataCountReducer";
+import popupReducer from "../reducer/popup/popupreducer";
 
 export const rootReducer = combineReducers({
     productList : productDataReducer,
@@ -14,5 +15,6 @@ export const rootReducer = combineReducers({
     favourite : FavouriteReducer,
     recent : RecentReducer,
     bestFood : bestFoodDataReducer,
-    totalData : dataCountReducer
+    totalData : dataCountReducer,
+    popup : popupReducer
 })
