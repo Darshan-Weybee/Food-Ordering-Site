@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { addFavItems } from "../../redux/reducer/favourite/FavouriteReducer";
 import { popupNotVisible, popupVisible } from "../../redux/reducer/popup/popupreducer";

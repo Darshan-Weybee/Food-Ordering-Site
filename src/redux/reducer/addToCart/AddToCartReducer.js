@@ -3,7 +3,7 @@ const ADD_ITEMS = "ADD_ITEMS";
 const DELETE_ITEM = "DELETE_ITEM";
 
 const AddToCartReducer = (state = initialState, action) => {
-
+ 
     switch(action.type){
         case ADD_ITEMS : 
         let isThere = false;

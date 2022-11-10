@@ -1,9 +1,16 @@
 import React from "react";
 import Image from "../Image/Image";
+import Draggable from "react-draggable";
 
 function Header(){
     return(
         <div className="header">
+            <Draggable
+          defaultPosition={{ x: 0, y: 0 }}
+        >
+           <div><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="book" width="20px" height="50px" style={{ margin:"20px"}} draggable={false}/></div>
+        </Draggable>
+           
             <div className="header-middle flexRow">
                 <div className="header-middle-left flexColumn">
                     <div className="header-middle-left-text flexColumn">
